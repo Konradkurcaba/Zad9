@@ -133,7 +133,7 @@ namespace Zad9
                 }
                 WorkerEventHandler workerDelegate = new WorkerEventHandler(CalculateWorker);
                 workerDelegate.BeginInvoke(mat1, mat2, size, asyncOp, null, null);
-
+                
 
 
             }
@@ -149,16 +149,19 @@ namespace Zad9
                 }
             }
 
-
+            void funkcja(object sender, MatMulCalculatorCompletedEventArgs e)
+            {
+                Console.WriteLine(e.size);
+            }
             static void Main(string[] args)
             {
                 MatMulCalculator c = new MatMulCalculator();
                 double[] a = { 2, 2, 2, 2 };
                 double[] b = { 2, 2, 2, 2 };
                 c.MatMulAsync(a, b, 2, 1);
-                
+                c.MatMulCalculatorCompleted += c.funkcja;
 
-
+                Thread.Sleep(10000);
 
 
         }
